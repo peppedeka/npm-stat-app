@@ -4,5 +4,21 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  name: 'NPM Stat Viewer',
+  apiConfig: {
+    baseUrl: 'https://api.npmjs.org/downloads/'
+  },
+  point: {
+    prefix: 'point/',
+    lastDay: 'last-day/',
+    lastWeek: 'last-week/',
+    lastMonth: 'last-month/'
+  },
+  range: {
+    prefix: 'range/',
+    lastDay: 'last-day/',
+    lastWeek: 'last-week/',
+    lastMonth: 'last-month/'
+  }
 };
