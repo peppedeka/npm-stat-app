@@ -20,5 +20,6 @@ export const environment = {
     lastDay: 'last-day/',
     lastWeek: 'last-week/',
     lastMonth: 'last-month/'
-  }
+  },
+  detail: 'https://api.npms.io/v2/search/suggestions?q='
 };

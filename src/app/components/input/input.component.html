@@ -1,0 +1,9 @@
+<div class="ui-g">
+  <div class="ui-g-4">{{ selectedInterval }}</div>
+  <div class="ui-g-4">
+    <p-chips [(ngModel)]="values" (keydown.enter)="search()" (onRemove)="search()"></p-chips>
+  </div>
+  <div class="ui-g-4">
+    <p-selectButton [options]="interval" [(ngModel)]="selectedInterval" (click)="search()"></p-selectButton>
+  </div>
+</div>
