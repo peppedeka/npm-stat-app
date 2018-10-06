@@ -1,6 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <app-input></app-input>
-  <app-chart></app-chart>
+  <app-chart [ngClass]="{'hidden' : !visible}"></app-chart>
   <app-detail></app-detail>
+  <app-intro [ngClass]="{'hidden' : visible}"></app-intro>
 </div>

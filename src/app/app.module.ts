@@ -16,7 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import { ChartComponent, DetailComponent, InputComponent } from './components/index';
+import {
+    ChartComponent, DetailComponent, InputComponent, IntroComponent
+} from './components/index';
 import { reducer } from './reducers/npmdata.reducer';
 import { NpmDataService } from './services/npm.data.service';
 
@@ -25,7 +27,8 @@ import { NpmDataService } from './services/npm.data.service';
     AppComponent,
     ChartComponent,
     InputComponent,
-    DetailComponent
+    DetailComponent,
+    IntroComponent
   ],
   imports: [
     ChipsModule,

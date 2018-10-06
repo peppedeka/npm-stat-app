@@ -39,6 +39,7 @@ export class NpmDataService {
   }
 
   range(type: string, values: string[]): void {
+
     const queryPackage: string = this._flatParam(values);
     const chartType = type === 'last-day' ? 'column' : 'area';
     const url = `${this.API_PATH}${environment.range.prefix}${type}/${queryPackage}`;
