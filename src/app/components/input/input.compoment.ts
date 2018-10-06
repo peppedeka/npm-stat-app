@@ -1,4 +1,5 @@
-import { SelectItem } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
+import { Observable } from 'rxjs/Observable';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -15,14 +16,21 @@ export class InputComponent implements OnInit {
   selectedInterval: string;
 
   values: string[];
+  inputValidator: Observable<boolean>;
 
-  constructor(private _npmDataSerice: NpmDataService) {
+  constructor(private _npmDataSerice: NpmDataService, private _messageService: MessageService) {
+    this.values = [];
     this.selectedInterval = 'last-month';
     this.interval = [
       { label: 'Day', value: 'last-day' },
       { label: 'Week', value: 'last-week' },
       { label: 'months', value: 'last-month' },
     ];
+    this._npmDataSerice.inputValidator.subscribe((valid: boolean) => {
+      if (!valid) {
+        this._messageService.add({ severity: 'error', summary: 'Ops package not found', detail: this.values.pop() });
+      }
+    });
   }
 
   ngOnInit() {
