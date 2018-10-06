@@ -1,5 +1,5 @@
-import { NpmData } from './../models/npmdata.model';
-import * as NpmDataActions from './../actions/npmdata.action';
+import * as NpmDataActions from '../actions/npmdata.action';
+import { NpmData } from '../models/npmdata.model';
 
 const initialState: NpmData = {
   data: {},

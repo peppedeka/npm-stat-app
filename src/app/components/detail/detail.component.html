@@ -1,13 +1,17 @@
-
 <div class="p-grid p-justify-between" style="margin-top: .5em">
   <div class="p-col" *ngFor="let detail of currentChartDetail; let i=index" [@animation]="'visible'">
     <p-panel styleClass="color-{{i % 10}}">
       <p-header>
-        {{ detail.package.name }}
+        {{ detail.collected.metadata.name }}
       </p-header>
-      <p>{{ detail.package.description}}</p>
-      <p-footer>
-        Footer content here
+      <p>{{ detail.collected.metadata.description}}</p>
+      <b>Score:</b>
+      <p>maintenance: {{ detail.score.detail.maintenance }}</p>
+      <p>popularity: {{ detail.score.detail.popularity }}</p>
+      <p>quality: {{ detail.score.detail.quality }}</p>
+
+      <p-footer *ngIf="detail.collected.source">
+        <img *ngFor="let badge of detail.collected.source.badges" src="{{ badge.urls.original }}">
       </p-footer>
     </p-panel>
   </div>

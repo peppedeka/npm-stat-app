@@ -21,5 +21,5 @@ export const environment = {
     lastWeek: 'last-week/',
     lastMonth: 'last-month/'
   },
-  detail: 'https://api.npms.io/v2/search/suggestions?q='
+  detail: 'https://api.npms.io/v2/package/'
 };

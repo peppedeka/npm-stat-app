@@ -1,8 +1,8 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import * as Highcharts from 'highcharts';
-import { NpmDataService } from '../../services/npm.data.service';
-import { trigger, state, style, transition, animate, AnimationEvent } from '@angular/animations';
+
 import { NpmResponse } from '../../interfaces/npm.interface';
+import { NpmDataService } from '../../services/npm.data.service';
 
 @Component({
   selector: 'app-detail',
@@ -32,8 +32,7 @@ import { NpmResponse } from '../../interfaces/npm.interface';
 export class DetailComponent implements OnInit {
 
   currentChartDetail: NpmResponse[] = [];
-  colors: ['#4572A7', '#AA4643', '#89A54E', '#80699B', '#3D96AE',
-    '#DB843D', '#92A8CD', '#A47D7C', '#B5CA92']
+
   constructor(private _npmDataSerice: NpmDataService) {
     this._npmDataSerice.currentDetailChart
       .filter(c => c != null)

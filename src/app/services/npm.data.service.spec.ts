@@ -1,6 +1,7 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod } from '@angular/http';
+import { inject, TestBed } from '@angular/core/testing';
+import { BaseRequestOptions, Http, RequestMethod, Response, ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+
 import { NpmDataService } from './npm.data.service';
 
 describe('NpmDataService', () => {

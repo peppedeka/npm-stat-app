@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
 import { SelectItem } from 'primeng/api';
+
+import { Component, OnInit } from '@angular/core';
 
 import { NpmDataService } from '../../services/npm.data.service';
 

@@ -40,10 +40,25 @@
   align-items: stretch;
 }
 
+p-footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: flex-start;
+}
+
 .p-col {
   flex-grow: 1;
   flex-basis: 0;
   margin: 10px;
+}
+
+img {
+  flex: 0 1 auto;
+  align-self: auto;
+  margin: 5px;
 }
 
 .ui-panel .ui-panel-content {

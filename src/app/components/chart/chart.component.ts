@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import 'rxjs/add/operator/filter';
 import * as Highcharts from 'highcharts';
+
+import { Component, OnInit } from '@angular/core';
+
 import { NpmDataService } from '../../services/npm.data.service';
+
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-chart',
