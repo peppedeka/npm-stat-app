@@ -30,12 +30,11 @@ export class IntroComponent implements OnInit {
       left: 0,
       right: 0,
       top: 0,
-      lineHeight: 4,
-      stroke: 'red',
-      strokeWidth: 2,
+      lineHeight: 8,
+      stroke: '#007ad9',
+      strokeWidth: 4,
       originX: 'left',
-      fontFamily: 'Helvetica',
-      textShadow: 'green 1px 15px 4px',
+      fontFamily: 'Courier',
       fontWeight: 'bold',
       statefullCache: true,
       selectable: false,
@@ -68,11 +67,11 @@ export class IntroComponent implements OnInit {
     this.textFabric.setColor('red');
     this._canvas.add(this.textFabric);
     this._canvas.renderAll();
-    const randomNumber: number = Math.floor(Math.random() * 6) + 1 ;
+    const randomNumber: number = Math.floor(Math.random() * 6) + 1;
     this.loadPattern(`../../../assets/${randomNumber}.png`);
-    Observable.interval(1000).subscribe(() => {
+    Observable.interval(3000).subscribe(() => {
       this.loadPattern(`../../../assets/${Math.floor(Math.random() * 6) + 1}.png`);
-    })
+    });
   }
 }
 
