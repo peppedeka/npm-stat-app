@@ -1,3 +1,5 @@
+import { FieldsetModule } from 'primeng/fieldset';
+
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
@@ -46,6 +48,9 @@ export class DetailComponent implements OnInit {
   }
   serColor() {
     return 'redColoredPanel';
+  }
+  getValue(value: number): number {
+    return Math.trunc(value * 100);
   }
 
   ngOnInit() {

@@ -2,7 +2,9 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { ChipsModule } from 'primeng/chips';
+import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
+import { ProgressBarModule } from 'primeng/progressbar';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
@@ -34,9 +36,11 @@ import { NpmDataService } from './services/npm.data.service';
     ChipsModule,
     ButtonModule,
     ToastModule,
+    FieldsetModule,
     CardModule,
     TableModule,
     PanelModule,
+    ProgressBarModule,
     SelectButtonModule,
     CommonModule,
     FormsModule,

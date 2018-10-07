@@ -4,15 +4,53 @@
       <p-header>
         {{ detail.collected.metadata.name }}
       </p-header>
-      <p>{{ detail.collected.metadata.description}}</p>
-      <b>Score:</b>
-      <p>maintenance: {{ detail.score.detail.maintenance }}</p>
-      <p>popularity: {{ detail.score.detail.popularity }}</p>
-      <p>quality: {{ detail.score.detail.quality }}</p>
-
-      <p-footer *ngIf="detail.collected.source">
-        <img *ngFor="let badge of detail.collected.source.badges" src="{{ badge.urls.original }}">
-      </p-footer>
+      <p-fieldset legend="Description">
+        {{ detail.collected.metadata.description}}
+      </p-fieldset>
+      <p-fieldset legend="Score">
+        <p-fieldset legend="Maintenance">
+          <div class="p-grid p-dir-col">
+            <div class="p-col-fixed">
+              <i class="pi pi-minus-circle"></i>
+            </div>
+            <div class="p-col">
+              <p-progressBar [value]="getValue(detail.score.detail.maintenance)"></p-progressBar>
+            </div>
+            <div class="p-col-fixed">
+              <i class="pi pi-check-circle"></i>
+            </div>
+          </div>
+        </p-fieldset>
+        <p-fieldset legend="Popularity">
+          <div class="p-grid p-dir-col">
+            <div class="p-col-fixed">
+              <i class="pi pi-minus-circle"></i>
+            </div>
+            <div class="p-col">
+              <p-progressBar [value]="getValue(detail.score.detail.popularity)"></p-progressBar>
+            </div>
+            <div class="p-col-fixed">
+              <i class="pi pi-check-circle"></i>
+            </div>
+          </div>
+        </p-fieldset>
+        <p-fieldset legend="Quality">
+          <div class="p-grid p-dir-col">
+            <div class="p-col-fixed">
+              <i class="pi pi-minus-circle"></i>
+            </div>
+            <div class="p-col">
+              <p-progressBar [value]="getValue(detail.score.detail.quality)"></p-progressBar>
+            </div>
+            <div class="p-col-fixed">
+              <i class="pi pi-check-circle"></i>
+            </div>
+          </div>
+        </p-fieldset>
+        <p-fieldset *ngIf="detail.collected.source && detail.collected.source.badges">
+          <img *ngFor="let badge of detail.collected.source.badges" src="{{ badge.urls.original }}">
+        </p-fieldset>
+      </p-fieldset>
     </p-panel>
   </div>
 </div>
