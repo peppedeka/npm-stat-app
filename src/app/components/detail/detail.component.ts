@@ -1,10 +1,9 @@
-import { FieldsetModule } from 'primeng/fieldset';
-
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { NpmResponse } from '../../interfaces/npm.interface';
 import { NpmDataService } from '../../services/npm.data.service';
+
 
 @Component({
   selector: 'app-detail',
