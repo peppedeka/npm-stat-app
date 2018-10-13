@@ -87,9 +87,7 @@ export class NpmDataService {
                 text: 'NPM STAT CHARTS'
               },
               subtitle: {
-                text: 'Sources: <a href="https://thebulletin.org/2006/july/global-nuclear-stockpiles-1945-2006">' +
-                  'thebulletin.org</a> &amp; <a href="https://www.armscontrol.org/factsheets/Nuclearweaponswhohaswhat">' +
-                  'armscontrol.org</a>'
+                text: 'Sources: <a href="https://api.npmjs.org/">api.npmjs.org</a>'
               },
               xAxis: {
                 type: 'datetime',
