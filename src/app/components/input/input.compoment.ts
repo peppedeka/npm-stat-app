@@ -27,7 +27,7 @@ export class InputComponent {
       { label: 'Day', value: 'last-day' },
       { label: 'Week', value: 'last-week' },
       { label: 'Month', value: 'last-month' },
-      { label: '& months', value: this.calculateLastFromDate({ range: 'month', value: 6 }) },
+      { label: '6 months', value: this.calculateLastFromDate({ range: 'month', value: 6 }) },
       { label: 'Year', value: this.calculateLastFromDate({ range: 'day', value: 364 }) }
     ];
     this._npmDataSerice.inputValidator.subscribe((valid: boolean) => {
