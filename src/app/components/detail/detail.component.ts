@@ -10,7 +10,6 @@ import { NpmDataService } from '../../services/npm.data.service';
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animation', [
       state('visible', style({
