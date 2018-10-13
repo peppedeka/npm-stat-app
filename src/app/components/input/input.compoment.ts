@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
+import { LastFrom } from '../../interfaces/input.interface';
 import { NpmDataService } from '../../services/npm.data.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { NpmDataService } from '../../services/npm.data.service';
   styleUrls: ['./input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputComponent implements OnInit {
+export class InputComponent {
 
   interval: SelectItem[];
   selectedInterval: string;
@@ -25,7 +26,9 @@ export class InputComponent implements OnInit {
     this.interval = [
       { label: 'Day', value: 'last-day' },
       { label: 'Week', value: 'last-week' },
-      { label: 'months', value: 'last-month' },
+      { label: 'Month', value: 'last-month' },
+      { label: '& months', value: this.calculateLastFromDate({ range: 'month', value: 6 }) },
+      { label: 'Year', value: this.calculateLastFromDate({ range: 'day', value: 364 }) }
     ];
     this._npmDataSerice.inputValidator.subscribe((valid: boolean) => {
       if (!valid) {
@@ -34,13 +37,30 @@ export class InputComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
-
   search(): void {
     this._npmDataSerice.search(this.selectedInterval, this.values);
   }
   console(event): void {
     console.log(this.values, event);
+  }
+
+  calculateLastFromDate(range: LastFrom): string {
+    const now = new Date();
+    const lastDate = new Date();
+
+    switch (range.range) {
+      case 'year':
+      default:
+        lastDate.setFullYear(now.getFullYear() - range.value);
+        break;
+      case 'month':
+        lastDate.setMonth(now.getMonth() - range.value);
+        break;
+      case 'day':
+        lastDate.setDate(now.getDate() - range.value);
+        break;
+    }
+
+    return `${lastDate.getFullYear()}-${lastDate.getMonth()}-${lastDate.getDay()}:${now.getFullYear()}-${now.getMonth()}-${now.getDay()}`;
   }
 }
