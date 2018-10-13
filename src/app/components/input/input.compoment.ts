@@ -1,14 +1,15 @@
 import { MessageService, SelectItem } from 'primeng/api';
 import { Observable } from 'rxjs/Observable';
 
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { NpmDataService } from '../../services/npm.data.service';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss']
+  styleUrls: ['./input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputComponent implements OnInit {
 

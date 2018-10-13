@@ -1,7 +1,7 @@
 import { FieldsetModule } from 'primeng/fieldset';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { NpmResponse } from '../../interfaces/npm.interface';
 import { NpmDataService } from '../../services/npm.data.service';
@@ -10,6 +10,7 @@ import { NpmDataService } from '../../services/npm.data.service';
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animation', [
       state('visible', style({

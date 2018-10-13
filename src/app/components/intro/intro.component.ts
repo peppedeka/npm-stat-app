@@ -3,7 +3,7 @@ import 'rxjs/add/observable/interval';
 
 import { Observable } from 'rxjs/Observable';
 
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { NpmDataService } from '../../services/npm.data.service';
 
@@ -13,7 +13,8 @@ declare const fabric: any;
   selector: 'app-intro',
   templateUrl: './intro.component.html',
   styleUrls: ['./intro.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IntroComponent implements OnInit {
 

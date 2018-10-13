@@ -3,14 +3,15 @@ import 'rxjs/add/operator/filter';
 import * as Highcharts from 'highcharts';
 import * as _ from 'lodash';
 
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { NpmDataService } from '../../services/npm.data.service';
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css']
+  styleUrls: ['./chart.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChartComponent implements OnInit {
 
