@@ -53,19 +53,9 @@ export class NpmDataService {
     if (values.length === 0) {
       this._hidden.next(true);
     }
-
+    const queryPackage: string = this._flatParam(values);
     const chartType = type === 'last-day' ? 'column' : 'area';
-    this.store.dispatch(new AddPackage({ name: 'none', data: { a: 'a' }, detail: { a: 'a' } }));
-    values.forEach((value) => {
-      this.store.select(selectors.getPackage(value)).subscribe((response) => {
-        console.log('asdads');
-        if (response) {
-          return response;
-        } else {
-          return this.http.get(`${this.API_PATH}${environment.range.prefix}${type}/${value}`);
-        }
-      });
-    });
+    const url = `${this.API_PATH}${environment.range.prefix}${type}/${queryPackage}`;
     const httpGet = [
       Observable.forkJoin(
         ...values.map(value => this.http.get(`${this.API_PATH}${environment.range.prefix}${type}/${value}`)
@@ -95,8 +85,8 @@ export class NpmDataService {
       )
     ];
 
-    this.store.select(selectors.getPackages(values)).subscribe(
-      (response: Package[]) => {
+    this.store.select(selectors.getItemByUrl(url)).subscribe(
+      (response: NpmData) => {
         if (response) {
           this._hidden.next(false);
           this.inputValidator.subscribe((valid: boolean) => {
