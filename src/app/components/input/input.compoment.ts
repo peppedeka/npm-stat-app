@@ -9,8 +9,7 @@ import { NpmDataService } from '../../services/npm.data.service';
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./input.component.scss']
 })
 export class InputComponent {
 
@@ -34,6 +33,9 @@ export class InputComponent {
     this._npmDataSerice.inputValidator.subscribe((valid: boolean) => {
       if (!valid) {
         this._messageService.add({ severity: 'error', summary: 'Ops package not found', detail: this.values.pop() });
+        if (this.values.length === 0) {
+          this._npmDataSerice.hide();
+        }
       }
     });
   }

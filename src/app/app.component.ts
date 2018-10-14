@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { Component } from '@angular/core';
 
 import { NpmDataService } from './services/npm.data.service';
 
@@ -7,25 +9,15 @@ import { NpmDataService } from './services/npm.data.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'app';
 
-  private _visible: boolean;
-  get visible(): boolean {
-    return this._visible;
-  }
-  constructor(private _npmDataSerice: NpmDataService) {
-    this._visible = false;
+  _hidden: Observable<boolean>;
+  get hidden(): Observable<boolean> {
+    return this._hidden;
   }
 
-  ngOnInit() {
-    this._npmDataSerice.currentChart
-      .subscribe((_currentChart: Highcharts.Options) => {
-        if (_currentChart === null) {
-          this._visible = false;
-        } else {
-          this._visible = true;
-        }
-      });
+  constructor(private _npmDataSerice: NpmDataService) {
+    this._hidden = this._npmDataSerice.hidden;
   }
 }

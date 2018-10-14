@@ -35,18 +35,37 @@ export class NpmDataService {
   private _inputValidator: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   get inputValidator(): Observable<boolean> { return this._inputValidator.asObservable(); }
 
+  private _hidden: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  get hidden(): Observable<boolean> { return this._hidden.asObservable(); }
+  hide(): void {
+    this._hidden.next(true);
+  }
+  visible(): void {
+    this._hidden.next(false);
+  }
+
+
   constructor(private http: Http, private store: Store<AppState>) {
     this._oldUrl = '';
   }
 
   range(type: string, values: string[]): void {
     if (values.length === 0) {
-      this._currentChart.next(null);
+      this._hidden.next(true);
     }
 
-    const queryPackage: string = this._flatParam(values);
     const chartType = type === 'last-day' ? 'column' : 'area';
-    const url = `${this.API_PATH}${environment.range.prefix}${type}/${queryPackage}`;
+    this.store.dispatch(new AddPackage({ name: 'none', data: { a: 'a' }, detail: { a: 'a' } }));
+    values.forEach((value) => {
+      this.store.select(selectors.getPackage(value)).subscribe((response) => {
+        console.log('asdads');
+        if (response) {
+          return response;
+        } else {
+          return this.http.get(`${this.API_PATH}${environment.range.prefix}${type}/${value}`);
+        }
+      });
+    });
     const httpGet = [
       Observable.forkJoin(
         ...values.map(value => this.http.get(`${this.API_PATH}${environment.range.prefix}${type}/${value}`)
@@ -76,20 +95,26 @@ export class NpmDataService {
       )
     ];
 
-    this.store.select(selectors.getItemByUrl(url)).subscribe(
-      (response: NpmData) => {
+    this.store.select(selectors.getPackages(values)).subscribe(
+      (response: Package[]) => {
         if (response) {
-          this._currentChart.next(response.data);
-          if (!_.isEqual(this._oldUrl, url)) {
-            this._currentDetailChart.next(response.details);
-            this._oldUrl = url;
-          }
+          this._hidden.next(false);
+          this.inputValidator.subscribe((valid: boolean) => {
+            if (valid) {
+              this._currentChart.next(response.data);
+              if (!_.isEqual(this._oldUrl, url)) {
+                this._currentDetailChart.next(response.details);
+                this._oldUrl = url;
+              }
+            }
+          });
         } else {
-
           Observable.forkJoin(httpGet).subscribe((res: any) => {
-            if (typeof res[1] === 'string') {
+            if (typeof res[0][0] === 'string' || typeof res[1][0] === 'string') {
               return;
             }
+            this._hidden.next(values.length === 0 ? true : false);
+
             const resJson: object = Object.assign({}, ...res[0]);
 
             const chartObject: Highcharts.Options = {

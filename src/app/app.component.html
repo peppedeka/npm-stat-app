@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <app-input></app-input>
-  <app-chart [ngClass]="{'hidden' : !visible}"></app-chart>
-  <app-detail [ngClass]="{'hidden' : !visible}"></app-detail>
-  <app-intro [ngClass]="{'hidden' : visible}"></app-intro>
+  <app-chart [ngClass]="{'hidden' : (hidden|async)}"></app-chart>
+  <app-detail [ngClass]="{'hidden' : (hidden|async)}"></app-detail>
+  <app-intro [ngClass]="{'hidden' : !(hidden|async)}"></app-intro>
 </div>
