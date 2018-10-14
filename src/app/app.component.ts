@@ -20,12 +20,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this._npmDataSerice.currentChart
-      .filter(c => c != null)
       .subscribe((_currentChart: Highcharts.Options) => {
-        if (_currentChart.series[0].data.length > 0) {
-          this._visible = true;
-        } else {
+        if (_currentChart === null) {
           this._visible = false;
+        } else {
+          this._visible = true;
         }
       });
   }

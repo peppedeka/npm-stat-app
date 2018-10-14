@@ -40,6 +40,9 @@ export class NpmDataService {
   }
 
   range(type: string, values: string[]): void {
+    if (values.length === 0) {
+      this._currentChart.next(null);
+    }
 
     const queryPackage: string = this._flatParam(values);
     const chartType = type === 'last-day' ? 'column' : 'area';
