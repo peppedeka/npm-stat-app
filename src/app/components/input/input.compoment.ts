@@ -62,6 +62,6 @@ export class InputComponent {
         break;
     }
 
-    return `${lastDate.getFullYear()}-${lastDate.getMonth()}-${lastDate.getDay()}:${now.getFullYear()}-${now.getMonth()}-${now.getDay()}`;
+    return `${lastDate.getFullYear()}-${lastDate.getMonth()}-${lastDate.getDate()}:${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
   }
 }
