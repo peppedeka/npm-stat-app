@@ -4,7 +4,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NpmResponse } from '../../interfaces/npm.interface';
 import { NpmDataService } from '../../services/npm.data.service';
 
-
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',

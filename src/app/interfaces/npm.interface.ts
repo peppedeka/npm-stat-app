@@ -17,10 +17,18 @@ export interface Download {
 }
 
 export interface NpmResponse {
-  analyzedAt: string;
+  package: Package;
   collected: Collected;
   evaluation: Evaluation;
   score: Score;
+}
+
+export interface Package {
+  name: string;
+  scope: string;
+  version: string;
+  description: string;
+  date: string;
 }
 
 export interface Collected {

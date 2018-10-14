@@ -16,6 +16,7 @@ import { environment } from '../../environments/environment';
 
 import { AddNpmData } from '../actions/npmdata.action';
 import { AppState } from '../app.state';
+import { Package } from '../interfaces/npm.interface';
 import { NpmData } from '../models/npmdata.model';
 import * as selectors from '../selectors/npmdata.selector';
 
@@ -43,25 +44,34 @@ export class NpmDataService {
     const queryPackage: string = this._flatParam(values);
     const chartType = type === 'last-day' ? 'column' : 'area';
     const url = `${this.API_PATH}${environment.range.prefix}${type}/${queryPackage}`;
-    const httpGet =
-      [
-        this.http.get(url)
+    const httpGet = [
+      Observable.forkJoin(
+        ...values.map(value => this.http.get(`${this.API_PATH}${environment.range.prefix}${type}/${value}`)
           .pipe(
-            map((res) => res),
+            map((res) => {
+              const resJson: object = res.json();
+              const response: object = {};
+              response[value] = resJson;
+              return response;
+            }),
             catchError((error) => {
               this._inputValidator.next(false);
               return of(`Bad Promise: ${error}`);
             })
-          ),
-        ...values.map(p => this.http.get(`${this.API_DETAILS_PATH}${p}`)
+          ))),
+      Observable.forkJoin(
+        ...values.map(value => this.http.get(`${this.API_DETAILS_PATH}${value}`)
           .pipe(
-            map((res) => res),
+            map((res) => {
+              return res.json().results[0];
+            }),
             catchError((error) => {
               this._inputValidator.next(false);
               return of(`Bad Promise: ${error}`);
             })
-          )
-        )];
+          ))
+      )
+    ];
 
     this.store.select(selectors.getItemByUrl(url)).subscribe(
       (response: NpmData) => {
@@ -72,12 +82,12 @@ export class NpmDataService {
             this._oldUrl = url;
           }
         } else {
-          Observable.forkJoin(httpGet).subscribe((res: any[]) => {
+
+          Observable.forkJoin(httpGet).subscribe((res: any) => {
             if (typeof res[1] === 'string') {
               return;
             }
-
-            const resJson: object = res[0].json();
+            const resJson: object = Object.assign({}, ...res[0]);
 
             const chartObject: Highcharts.Options = {
               chart: {
@@ -113,15 +123,7 @@ export class NpmDataService {
               },
               series: this._seriesBuilder(resJson)
             };
-            res.shift();
-            const details = res.map((row) => {
-              if (typeof row !== 'string') {
-                const rowJson = row.json();
-                return rowJson;
-              } else {
-                return undefined;
-              }
-            }).filter((row) => row !== undefined);
+            const details = res[1];
             this.store.dispatch(new AddNpmData({ url: url, data: chartObject, details: details }));
             this._currentChart.next(chartObject);
             if (!_.isEqual(this._oldUrl, url)) {

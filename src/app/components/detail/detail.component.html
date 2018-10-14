@@ -2,10 +2,10 @@
   <div class="p-col" *ngFor="let detail of currentChartDetail; let i=index" [@animation]="'visible'">
     <p-panel styleClass="color-{{i % 10}}">
       <p-header>
-        {{ detail.collected.metadata.name }}
+        {{ detail.package.name }}
       </p-header>
       <p-fieldset legend="Description">
-        {{ detail.collected.metadata.description}}
+        {{ detail.package.description}}
       </p-fieldset>
       <p-fieldset legend="Score">
         <p-fieldset legend="Maintenance">
@@ -46,9 +46,6 @@
               <i class="pi pi-check-circle"></i>
             </div>
           </div>
-        </p-fieldset>
-        <p-fieldset *ngIf="detail.collected.source && detail.collected.source.badges">
-          <img *ngFor="let badge of detail.collected.source.badges" src="{{ badge.urls.original }}">
         </p-fieldset>
       </p-fieldset>
     </p-panel>
