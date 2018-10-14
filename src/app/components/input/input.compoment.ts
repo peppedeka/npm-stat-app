@@ -28,8 +28,8 @@ export class InputComponent {
       { label: 'Week', value: 'last-week' },
       { label: 'Month', value: 'last-month' },
       { label: '6 months', value: this.calculateLastFromDate({ range: 'month', value: 6 }) },
-      { label: 'Year', value: this.calculateLastFromDate({ range: 'day', value: 364 }) },
-      { label: '2 Year', value: this.calculateLastFromDate({ range: 'year', value: 2 }) }
+      { label: 'Year', value: this.calculateLastFromDate({ range: 'year', value: 1 }) },
+      { label: '2 Years', value: this.calculateLastFromDate({ range: 'year', value: 2 }) },
     ];
     this._npmDataSerice.inputValidator.subscribe((valid: boolean) => {
       if (!valid) {
